@@ -1,0 +1,200 @@
+:root {
+  --primary-color: #00aaff;
+  --secondary-color: #f5c518;
+  --whatsapp-color: #25d366;
+  --background-dark: rgba(9, 18, 30, 0.95);
+  --text-light: #e0eaf4;
+  --text-hover: #00aaff;
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  --tablet-breakpoint: 1024px;
+  --mobile-breakpoint: 768px;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5rem;
+  height: 80px;
+
+  background: var(--background-dark);
+  backdrop-filter: blur(25px);
+  border-bottom: 1px solid var(--glass-border);
+  transition: padding 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 1rem 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+.header .logo {
+  cursor: pointer;
+  background-image: url('../../../../public/assets/friosistemas.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+  height: 48px;
+  width: 180px;
+  transition: transform 0.3s ease;
+}
+.header .logo:hover {
+  transform: scale(1.02);
+}
+
+.header .header-content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.header .main-nav {
+  display: flex;
+  gap: 3.5rem;
+}
+
+.header .main-nav a {
+  position: relative;
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: 0.75px;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 0.5rem 0;
+}
+.header .main-nav a:hover {
+  color: var(--text-hover);
+  transform: translateY(-2px);
+}
+.header .main-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-out;
+  border-radius: 1px;
+}
+.header .main-nav a:hover::after {
+  transform: scaleX(1);
+}
+.header .main-nav a.active {
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+.header .main-nav a.active::after {
+  background-color: var(--secondary-color);
+  transform: scaleX(1);
+}
+
+.header .whatsapp-button {
+  background-color: var(--whatsapp-color);
+  color: var(--background-dark);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  border: 2px solid var(--whatsapp-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.header .whatsapp-button .fab {
+  font-size: 1.1rem;
+}
+.header .whatsapp-button:hover {
+  background-color: transparent;
+  color: var(--whatsapp-color);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.header .menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.header .menu-toggle .bar {
+  height: 3px;
+  width: 100%;
+  background-color: var(--text-light);
+  border-radius: 1px;
+  transition: all 0.3s ease-in-out;
+}
+.header .menu-toggle.open .bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.header .menu-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.header .menu-toggle.open .bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+@media (max-width: 1024px) {
+  .header .menu-toggle {
+    display: flex;
+  }
+  .header .header-content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    padding: 6rem 2rem 2rem;
+
+    background: var(--background-dark);
+    backdrop-filter: blur(20px);
+
+    transform: translateX(100%);
+  }
+  .header .header-content.open {
+    transform: translateX(0);
+  }
+  .header .main-nav {
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+  }
+  .header .main-nav a {
+    font-size: 1.2rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .header .main-nav a:hover {
+    transform: none;
+  }
+  .header .main-nav a::after {
+    display: none;
+  }
+  .header .whatsapp-button {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}

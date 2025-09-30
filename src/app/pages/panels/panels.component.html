@@ -1,5 +1,4 @@
 <section class="panels" aria-labelledby="panels-title">
-  <!-- HERO -->
   <header class="panels__hero" role="banner" aria-label="Paneles aislados">
     <div
       class="panels__hero-bg"
@@ -18,12 +17,10 @@
     </div>
   </header>
 
-  <!-- NUESTROS PANELES (informativo sin botones) -->
   <section class="panels__materials container" aria-labelledby="materials-title">
     <h2 id="materials-title" class="section-title">Nuestros paneles</h2>
 
     <article class="materials" role="list">
-      <!-- EPS TECHO (info) -->
       <article class="material card" role="listitem">
         <figure class="material__media">
           <img
@@ -47,7 +44,6 @@
         </div>
       </article>
 
-      <!-- EPS PARED (info) -->
       <article class="material card" role="listitem">
         <figure class="material__media">
           <img
@@ -71,7 +67,6 @@
         </div>
       </article>
 
-      <!-- PUR PARED (info) -->
       <article class="material card" role="listitem">
         <figure class="material__media">
           <img
@@ -99,11 +94,9 @@
 
   <div class="divider" role="separator" aria-hidden="true"></div>
 
-  <!-- COTIZADOR -->
   <h2 class="section-title section-title--small">Cotiza tus paneles</h2>
 
   <section class="container" aria-label="Selector de material a cotizar">
-    <!-- Selección de material -->
     <fieldset class="selector">
       <legend class="selector__legend">Material</legend>
       <label class="chip">
@@ -128,7 +121,6 @@
       </label>
     </fieldset>
 
-    <!-- Si es EPS: selector techo/pared -->
     <fieldset
       class="selector"
       *ngIf="material() === 'EPS'"
@@ -158,7 +150,6 @@
     </fieldset>
   </section>
 
-  <!-- ================= EPS: TECHO ================= -->
   <section
     *ngIf="material() === 'EPS' && epsTipo() === 'techo'"
     class="panelcalc card container"
@@ -224,7 +215,6 @@
     </div>
   </section>
 
-  <!-- ================= EPS: PARED ================= -->
   <section
     *ngIf="material() === 'EPS' && epsTipo() === 'pared'"
     class="panelcalc card container"
@@ -301,7 +291,6 @@
     </div>
   </section>
 
-  <!-- ================= PUR: PARED ================= -->
   <section
     *ngIf="material() === 'PUR'"
     class="panelcalc card container"

@@ -17,56 +17,45 @@ type PurEspesor = '100' | '150';
 export class PanelsComponent {
   private fb = inject(FormBuilder);
 
-  // ====== Constantes ======
   readonly IGV = 0.18;
 
-  // EPS Techo
-  readonly EPS_TECHO_LARGO = 3;        // m
-  readonly EPS_TECHO_ANCHO = 1.16;     // m
-  readonly EPS_TECHO_PRECIO_M2 = 25;   // USD (sin IGV) — fijo
+  readonly EPS_TECHO_LARGO = 3;
+  readonly EPS_TECHO_ANCHO = 1.16;
+  readonly EPS_TECHO_PRECIO_M2 = 25;
 
-  // EPS Pared
-  readonly EPS_PARED_ANCHO = 1.16;     // m
-  readonly EPS_PARED_PRECIO_100 = 25;  // USD/m2 (sin IGV)
-  readonly EPS_PARED_PRECIO_200 = 35;  // USD/m2 (sin IGV)
+  readonly EPS_PARED_ANCHO = 1.16;
+  readonly EPS_PARED_PRECIO_100 = 25;
+  readonly EPS_PARED_PRECIO_200 = 35;
 
-  // PUR Pared (precios incluyen IGV)
-  readonly PUR_PRECIO_100_CON_IGV = 650; // USD
-  readonly PUR_PRECIO_150_CON_IGV = 750; // USD
+  readonly PUR_PRECIO_100_CON_IGV = 650;
+  readonly PUR_PRECIO_150_CON_IGV = 750;
 
-  // ====== Imágenes ======
   readonly images = {
     epsTecho: 'assets/Poliestireno_techo.jpg',
     epsPared: 'assets/Poliestireno_pared.jpg',
     pur: 'assets/Poliuretano_pared.jpg',
-    panels: 'assets/Carapongo/Paneles_fondo.jpeg' // hero
+    panels: 'assets/Carapongo/Paneles_fondo.jpeg'
   };
 
-  // ====== Estado ======
   material = signal<Material>('EPS');
   epsTipo  = signal<EpsTipo>('techo');
 
-  // ====== Forms ======
-  // EPS Techo (precio fijo; solo cantidad)
   epsFormTecho = this.fb.group({
     cantidad: [1, [Validators.required, Validators.min(1)]],
   });
 
-  // EPS Pared
   epsFormPared = this.fb.group({
     espesor: ['100' as EpsEspesor, Validators.required],
     largoMetros: [1, [Validators.required, Validators.min(0.5)]],
   });
 
-  // PUR Pared
   purForm = this.fb.group({
     espesor: ['100' as PurEspesor, Validators.required],
     cantidad: [1, [Validators.required, Validators.min(1)]],
   });
 
-  // ====== EPS Techo (propiedades) ======
   get epsTechoM2PorPlacha(): number {
-    return this.EPS_TECHO_LARGO * this.EPS_TECHO_ANCHO; // 3 * 1.16 = 3.48
+    return this.EPS_TECHO_LARGO * this.EPS_TECHO_ANCHO;
   }
   get epsTechoCantidad(): number {
     return Number(this.epsFormTecho.get('cantidad')!.value) || 0;
@@ -77,7 +66,6 @@ export class PanelsComponent {
   get epsTechoIgv(): number { return this.epsTechoSubtotal * this.IGV; }
   get epsTechoTotal(): number { return this.epsTechoSubtotal + this.epsTechoIgv; }
 
-  // ====== EPS Pared (propiedades) ======
   get epsParedEspesor(): EpsEspesor {
     return (this.epsFormPared.get('espesor')!.value as EpsEspesor) ?? '100';
   }
@@ -96,7 +84,6 @@ export class PanelsComponent {
   get epsParedIgv(): number { return this.epsParedSubtotal * this.IGV; }
   get epsParedTotal(): number { return this.epsParedSubtotal + this.epsParedIgv; }
 
-  // ====== PUR Pared (propiedades; precios incluyen IGV) ======
   get purEspesor(): PurEspesor {
     return (this.purForm.get('espesor')!.value as PurEspesor) ?? '100';
   }
@@ -112,7 +99,6 @@ export class PanelsComponent {
   get purSubtotal(): number { return this.purTotalConIgv / (1 + this.IGV); }
   get purIgv(): number { return this.purTotalConIgv - this.purSubtotal; }
 
-  // ====== Acciones Cotizar (marcar/validar) ======
   cotizarEpsTecho() {
     this.epsFormTecho.markAllAsTouched();
     this.epsFormTecho.updateValueAndValidity({ onlySelf: false, emitEvent: true });
@@ -126,13 +112,11 @@ export class PanelsComponent {
     this.purForm.updateValueAndValidity({ onlySelf: false, emitEvent: true });
   }
 
-  // ====== Utilidades ======
   money(v: number) {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
       .format(v || 0);
   }
 
-  // ====== WhatsApp ======
   private wa(phone: string, text: string) {
     const encoded = encodeURIComponent(text);
     return `https://wa.me/${phone}?text=${encoded}`;
@@ -158,7 +142,6 @@ export class PanelsComponent {
     window.open(this.wa('51991038374', msg), '_blank');
   }
 
-  // Imagen fallback opcional
   onImgError(ev: Event) {
     (ev.target as HTMLImageElement).src = 'https://dummyimage.com/1200x675/1f2937/ffffff&text=Imagen+no+disponible';
   }

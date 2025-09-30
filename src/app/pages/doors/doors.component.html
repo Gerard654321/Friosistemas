@@ -1,1 +1,100 @@
-<p>doors.component works!</p>
+<section class="doors">
+  <div class="doors__header">
+    <h2>Fabricación de Puertas</h2>
+    <p>Selecciona el tipo de puerta, ingresa las medidas y obtén tu cotización.</p>
+  </div>
+
+  <form class="doors__form" (ngSubmit)="calcularPrecio()">
+    <div class="options">
+      <label class="option-card batiente" [class.active]="tipoPuerta === 'batiente'">
+        <input type="radio" name="tipoPuerta" value="batiente" [(ngModel)]="tipoPuerta" (change)="calcularPrecio()">
+        <div class="overlay">
+          <h3>Batiente</h3>
+          <p>$500 / m²</p>
+        </div>
+      </label>
+
+      <label class="option-card vaiven" [class.active]="tipoPuerta === 'vaiven'">
+        <input type="radio" name="tipoPuerta" value="vaiven" [(ngModel)]="tipoPuerta" (change)="calcularPrecio()">
+        <div class="overlay">
+          <h3>Vaivén</h3>
+          <p>$600 / m²</p>
+        </div>
+      </label>
+
+      <label class="option-card corrediza" [class.active]="tipoPuerta === 'corrediza'">
+        <input type="radio" name="tipoPuerta" value="corrediza" [(ngModel)]="tipoPuerta" (change)="calcularPrecio()">
+        <div class="overlay">
+          <h3>Corrediza</h3>
+          <p>$700 / m²</p>
+        </div>
+      </label>
+    </div>
+
+    <div class="form-group dimensions">
+      <div>
+        <label for="ancho">Ancho (m)</label>
+        <input type="number" [(ngModel)]="ancho" name="ancho" step="0.01" (input)="calcularPrecio()" required>
+      </div>
+      <div>
+        <label for="alto">Alto (m)</label>
+        <input type="number" [(ngModel)]="alto" name="alto" step="0.01" (input)="calcularPrecio()" required>
+      </div>
+    </div>
+
+    <div *ngIf="tipoPuerta === 'vaiven'" class="form-group hojas">
+      <label for="hojas">Número de hojas:</label>
+      <select [(ngModel)]="hojas" name="hojas" (change)="calcularPrecio()">
+        <option [ngValue]="1">1 hoja</option>
+        <option [ngValue]="2">2 hojas</option>
+      </select>
+    </div>
+  </form>
+
+  <div class="doors__preview">
+    <h3>Vista previa</h3>
+
+    <div class="preview-wrapper" [style.width.px]="ancho*100" [style.height.px]="alto*100">
+      <svg *ngIf="tipoPuerta === 'batiente'" [attr.width]="ancho*100" [attr.height]="alto*100" class="door-svg">
+        <rect width="100%" height="100%" fill="#f3f4f6" stroke="#111" stroke-width="4"/>
+        <line x1="0" y1="0" [attr.x2]="ancho*100" y2="0" stroke="black" stroke-dasharray="4"/>
+        <line x1="0" y1="0" x2="0" [attr.y2]="alto*100" stroke="black" stroke-dasharray="4"/>
+        <line [attr.x1]="ancho*100" y1="0" [attr.x2]="ancho*100" [attr.y2]="alto*100" stroke="black" stroke-dasharray="4"/>
+        <line x1="0" [attr.y1]="alto*100" [attr.x2]="ancho*100" [attr.y2]="alto*100" stroke="black" stroke-dasharray="4"/>
+        <circle [attr.cx]="ancho*100 - 15" [attr.cy]="(alto*100)/2" r="6" fill="#000"/>
+        <text x="50%" y="15" text-anchor="middle" font-size="14" fill="black">{{ ancho }}m</text>
+        <text x="50%" [attr.y]="alto*100 - 5" text-anchor="middle" font-size="14" fill="black">{{ ancho }}m</text>
+        <text x="5" [attr.y]="(alto*100)/2" text-anchor="start" font-size="14" fill="black">{{ alto }}m</text>
+        <text [attr.x]="ancho*100 - 5" [attr.y]="(alto*100)/2" text-anchor="end" font-size="14" fill="black">{{ alto }}m</text>
+      </svg>
+
+      <svg *ngIf="tipoPuerta === 'vaiven' && hojas === 1" [attr.width]="ancho*100" [attr.height]="alto*100" class="door-svg">
+        <rect width="100%" height="100%" fill="#f9fafb" stroke="#000" stroke-width="4" stroke-dasharray="10,5"/>
+        <circle [attr.cx]="ancho*100 - 15" [attr.cy]="(alto*100)/2" r="6" fill="#000"/>
+      </svg>
+
+      <svg *ngIf="tipoPuerta === 'vaiven' && hojas === 2" [attr.width]="ancho*100" [attr.height]="alto*100" class="door-svg">
+        <rect x="0" y="0" [attr.width]="(ancho*100)/2" [attr.height]="alto*100" fill="#f9fafb" stroke="#000" stroke-width="4" stroke-dasharray="10,5"/>
+        <rect [attr.x]="(ancho*100)/2" y="0" [attr.width]="(ancho*100)/2" [attr.height]="alto*100" fill="#f9fafb" stroke="#000" stroke-width="4" stroke-dasharray="10,5"/>
+        <circle [attr.cx]="(ancho*100)/2 - 15" [attr.cy]="(alto*100)/2" r="5" fill="#000"/>
+        <circle [attr.cx]="(ancho*100)/2 + 15" [attr.cy]="(alto*100)/2" r="5" fill="#000"/>
+      </svg>
+
+      <svg *ngIf="tipoPuerta === 'corrediza'" [attr.width]="ancho*100" [attr.height]="alto*100" class="door-svg">
+        <rect x="0" y="0" [attr.width]="(ancho*100)/2" [attr.height]="alto*100" fill="#e5e7eb" stroke="#000" stroke-width="4"/>
+        <rect [attr.x]="(ancho*100)/2" y="0" [attr.width]="(ancho*100)/2" [attr.height]="alto*100" fill="#fff" stroke="#000" stroke-width="2"/>
+        <line x1="0" y1="0" [attr.x2]="ancho*100" y2="0" stroke="#000" stroke-width="4"/>
+        <circle [attr.cx]="(ancho*100)/2 - 15" [attr.cy]="(alto*100)/2" r="5" fill="#000"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="doors__quote">
+    <p><strong>Área:</strong> {{ area }} m²</p>
+    <p><strong>Precio total:</strong> <span class="price">${{ precio.toFixed(2) }}</span></p>
+  </div>
+
+  <button type="button" (click)="enviarWhatsApp()" class="btn-whatsapp">
+    <i class="fab fa-whatsapp"></i> Enviar cotización por WhatsApp
+  </button>
+</section>

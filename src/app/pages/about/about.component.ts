@@ -1,9 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-about',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
@@ -12,7 +14,6 @@ export class AboutComponent {
   private meta = inject(Meta);
 
   constructor() {
-    // SEO básico
     this.title.setTitle('Nosotros | Friosistemas');
     this.meta.updateTag({
       name: 'description',
@@ -23,7 +24,7 @@ export class AboutComponent {
 
   readonly company = {
     name: 'Friosistemas',
-    location: 'Carapongo, Lima – Perú',
+    location: 'Carapongo - Chosica, Lima - Perú',
     email: 'ventas@friosistemas.pe',
     phone: '+51 991 038 374'
   };

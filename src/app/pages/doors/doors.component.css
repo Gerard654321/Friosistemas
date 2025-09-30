@@ -1,0 +1,172 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('/assets/Puertas/Pivotante_02.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: sans-serif;
+}
+
+.doors {
+  max-width: 950px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: rgba(15, 23, 42, 0.3);
+  backdrop-filter: blur(6px);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: var(--text);
+  text-align: center;
+}
+
+.doors__header h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+.doors__header p {
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.options {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.option-card {
+  flex: 1;
+  height: 200px;
+  border-radius: 1rem;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s, border 0.3s;
+  border: 3px solid transparent;
+}
+.option-card input {
+  display: none;
+}
+.option-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  text-align: left;
+  transition: background 0.3s;
+}
+.option-card h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.option-card p {
+  margin: 0.2rem 0 0;
+  font-size: 1rem;
+}
+.option-card:hover {
+  transform: scale(1.05);
+}
+.option-card.active {
+  border-color: var(--primary);
+}
+.option-card.batiente {
+  background: url('/assets/Puertas/Pivotante.jpg') center/cover no-repeat;
+}
+.option-card.vaiven {
+  background: url('/assets/Puertas/Vaiven.jpg') center/cover no-repeat;
+}
+.option-card.corrediza {
+  background: url('/assets/Puertas/Corredera.jpg') center/cover no-repeat;
+}
+.dimensions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.dimensions div {
+  flex: 1;
+  text-align: left;
+}
+.dimensions label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+.dimensions input,
+.dimensions select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+.dimensions input:focus,
+.dimensions select:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+.doors__preview {
+  margin: 2.5rem 0;
+}
+.doors__preview h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.preview-wrapper {
+  margin: 0 auto;
+  background: #f3f4f6;
+  border: 2px dashed #1f2937;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.door-svg {
+  background: #fff;
+  border: 2px solid #1f2937;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+.doors__quote {
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+}
+.doors__quote .price {
+  color: var(--primary);
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: transform 0.2s, background 0.3s;
+}
+.btn-whatsapp:hover {
+  background: #1ebe5d;
+  transform: scale(1.05);
+}
+.btn-whatsapp i {
+  font-size: 1.3rem;
+}
