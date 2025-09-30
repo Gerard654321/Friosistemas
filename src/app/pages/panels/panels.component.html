@@ -1,0 +1,375 @@
+<section class="panels" aria-labelledby="panels-title">
+  <!-- HERO -->
+  <header class="panels__hero" role="banner" aria-label="Paneles aislados">
+    <div
+      class="panels__hero-bg"
+      aria-hidden="true"
+      [style.background-image]="
+        'linear-gradient(180deg, rgba(11,18,32,.05) 0%, rgba(11,18,32,.72) 60%, var(--bg) 100%), url(' + images.panels + ')'
+      "
+      style="background-position: center; background-size: cover; background-repeat: no-repeat;"
+    ></div>
+
+    <div class="panels__hero-content">
+      <h1 id="panels-title" class="panels__title">Paneles aislados</h1>
+      <p class="panels__subtitle">
+        Elige entre <strong>EPS Techo</strong>, <strong>EPS Pared</strong> o <strong>PUR Pared</strong> y cotiza.
+      </p>
+    </div>
+  </header>
+
+  <!-- NUESTROS PANELES (informativo sin botones) -->
+  <section class="panels__materials container" aria-labelledby="materials-title">
+    <h2 id="materials-title" class="section-title">Nuestros paneles</h2>
+
+    <article class="materials" role="list">
+      <!-- EPS TECHO (info) -->
+      <article class="material card" role="listitem">
+        <figure class="material__media">
+          <img
+            [src]="images.epsTecho"
+            alt="Panel EPS para techo"
+            loading="lazy"
+            width="1200"
+            height="675"
+            (error)="onImgError($event)"
+          />
+        </figure>
+        <div class="material__body">
+          <h3 class="material__title">Poliestireno (EPS) – Techo</h3>
+          <p class="material__text">
+            Plancha de <strong>3.00 m × 1.16 m</strong> · Espesor típico <strong>200 mm</strong>.
+          </p>
+          <ul class="facts" role="list" aria-label="Características y precios">
+            <li>Área por plancha: <strong>{{ epsTechoM2PorPlacha | number:'1.2-2' }} m²</strong></li>
+            <li>Precio de referencia: <strong>{{ money(EPS_TECHO_PRECIO_M2) }}</strong> / m² (sin IGV)</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- EPS PARED (info) -->
+      <article class="material card" role="listitem">
+        <figure class="material__media">
+          <img
+            [src]="images.epsPared"
+            alt="Panel EPS para pared"
+            loading="lazy"
+            width="1200"
+            height="675"
+            (error)="onImgError($event)"
+          />
+        </figure>
+        <div class="material__body">
+          <h3 class="material__title">Poliestireno (EPS) – Pared</h3>
+          <p class="material__text">
+            Ancho fijo <strong>1.16 m</strong> · Espesores <strong>100 mm</strong> o <strong>200 mm</strong>.
+          </p>
+          <ul class="facts" role="list" aria-label="Características y precios">
+            <li>Precio 100 mm: <strong>{{ money(EPS_PARED_PRECIO_100) }}</strong> / m² (sin IGV)</li>
+            <li>Precio 200 mm: <strong>{{ money(EPS_PARED_PRECIO_200) }}</strong> / m² (sin IGV)</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- PUR PARED (info) -->
+      <article class="material card" role="listitem">
+        <figure class="material__media">
+          <img
+            [src]="images.pur"
+            alt="Panel PUR para pared"
+            loading="lazy"
+            width="1200"
+            height="675"
+            (error)="onImgError($event)"
+          />
+        </figure>
+        <div class="material__body">
+          <h3 class="material__title">Poliuretano (PUR) – Pared</h3>
+          <p class="material__text">
+            Plancha <strong>11.95 m × 1.12 m</strong> · Espesor <strong>100</strong> o <strong>150 mm</strong>.
+          </p>
+          <ul class="facts" role="list" aria-label="Características y precios">
+            <li>Precio 100 mm: <strong>{{ money(PUR_PRECIO_100_CON_IGV) }}</strong> (con IGV)</li>
+            <li>Precio 150 mm: <strong>{{ money(PUR_PRECIO_150_CON_IGV) }}</strong> (con IGV)</li>
+          </ul>
+        </div>
+      </article>
+    </article>
+  </section>
+
+  <div class="divider" role="separator" aria-hidden="true"></div>
+
+  <!-- COTIZADOR -->
+  <h2 class="section-title section-title--small">Cotiza tus paneles</h2>
+
+  <section class="container" aria-label="Selector de material a cotizar">
+    <!-- Selección de material -->
+    <fieldset class="selector">
+      <legend class="selector__legend">Material</legend>
+      <label class="chip">
+        <input
+          type="radio"
+          name="material"
+          value="EPS"
+          [checked]="material() === 'EPS'"
+          (change)="material.set('EPS')"
+        />
+        <span>Poliestireno (EPS)</span>
+      </label>
+      <label class="chip">
+        <input
+          type="radio"
+          name="material"
+          value="PUR"
+          [checked]="material() === 'PUR'"
+          (change)="material.set('PUR')"
+        />
+        <span>Poliuretano (PUR)</span>
+      </label>
+    </fieldset>
+
+    <!-- Si es EPS: selector techo/pared -->
+    <fieldset
+      class="selector"
+      *ngIf="material() === 'EPS'"
+      aria-label="Tipo de panel EPS"
+    >
+      <legend class="selector__legend">Tipo de EPS</legend>
+      <label class="chip">
+        <input
+          type="radio"
+          name="epsTipo"
+          value="techo"
+          [checked]="epsTipo() === 'techo'"
+          (change)="epsTipo.set('techo')"
+        />
+        <span>Techo</span>
+      </label>
+      <label class="chip">
+        <input
+          type="radio"
+          name="epsTipo"
+          value="pared"
+          [checked]="epsTipo() === 'pared'"
+          (change)="epsTipo.set('pared')"
+        />
+        <span>Pared</span>
+      </label>
+    </fieldset>
+  </section>
+
+  <!-- ================= EPS: TECHO ================= -->
+  <section
+    *ngIf="material() === 'EPS' && epsTipo() === 'techo'"
+    class="panelcalc card container"
+    aria-labelledby="eps-techo-title"
+  >
+    <h3 id="eps-techo-title" class="panelcalc__title">EPS – Techo</h3>
+
+    <div class="grid2">
+      <div>
+        <img
+          [src]="images.epsTecho"
+          alt="Panel EPS para techo"
+          width="1200"
+          height="675"
+          (error)="onImgError($event)"
+        />
+        <ul class="facts" role="list">
+          <li>Plancha: <strong>3.00 m × 1.16 m</strong> ({{ epsTechoM2PorPlacha | number:'1.2-2' }} m²)</li>
+          <li>Espesor: <strong>200 mm</strong></li>
+          <li>Precio base: <strong>{{ money(EPS_TECHO_PRECIO_M2) }}</strong> / m² (sin IGV)</li>
+        </ul>
+      </div>
+
+      <form
+        [formGroup]="epsFormTecho"
+        class="form"
+        novalidate
+        aria-labelledby="eps-techo-title"
+        lang="es-PE"
+      >
+        <label class="field">
+          <span class="field__label">Cantidad de planchas</span>
+          <input
+            type="number"
+            formControlName="cantidad"
+            min="1"
+            inputmode="numeric"
+            aria-describedby="eps-techo-ayuda"
+          />
+          <small id="eps-techo-ayuda" class="field__hint">Cada plancha = {{ epsTechoM2PorPlacha | number:'1.2-2' }} m²</small>
+        </label>
+
+        <div class="actions">
+          <button type="button" class="btn btn--ghost" (click)="cotizarEpsTecho()">Cotizar</button>
+          <button
+            type="button"
+            class="btn btn--primary"
+            (click)="pedirEpsTecho()"
+            [disabled]="epsFormTecho.invalid"
+            [attr.aria-disabled]="epsFormTecho.invalid"
+          >
+            Pedir por WhatsApp
+          </button>
+        </div>
+
+        <div class="summary" aria-live="polite">
+          <p>M² por plancha: <strong>{{ epsTechoM2PorPlacha | number:'1.2-2' }}</strong></p>
+          <p>Subtotal: <strong>{{ money(epsTechoSubtotal) }}</strong></p>
+          <p>IGV (18%): <strong>{{ money(epsTechoIgv) }}</strong></p>
+          <p class="total">Total: <strong>{{ money(epsTechoTotal) }}</strong></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= EPS: PARED ================= -->
+  <section
+    *ngIf="material() === 'EPS' && epsTipo() === 'pared'"
+    class="panelcalc card container"
+    aria-labelledby="eps-pared-title"
+  >
+    <h3 id="eps-pared-title" class="panelcalc__title">EPS – Pared</h3>
+
+    <div class="grid2">
+      <div>
+        <img
+          [src]="images.epsPared"
+          alt="Panel EPS para pared"
+          width="1200"
+          height="675"
+          (error)="onImgError($event)"
+        />
+        <ul class="facts" role="list">
+          <li>Ancho fijo: <strong>{{ EPS_PARED_ANCHO }} m</strong></li>
+          <li>Espesor: <strong>100</strong> o <strong>200 mm</strong></li>
+          <li>Precio 100 mm: <strong>{{ money(EPS_PARED_PRECIO_100) }}</strong> / m² (sin IGV)</li>
+          <li>Precio 200 mm: <strong>{{ money(EPS_PARED_PRECIO_200) }}</strong> / m² (sin IGV)</li>
+        </ul>
+      </div>
+
+      <form
+        [formGroup]="epsFormPared"
+        class="form"
+        novalidate
+        aria-labelledby="eps-pared-title"
+        lang="es-PE"
+      >
+        <label class="field">
+          <span class="field__label">Espesor</span>
+          <select formControlName="espesor">
+            <option value="100">100 mm</option>
+            <option value="200">200 mm</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field__label">Metros de largo (X)</span>
+          <input
+            type="number"
+            formControlName="largoMetros"
+            min="0.5"
+            step="0.1"
+            inputmode="decimal"
+            aria-describedby="eps-pared-ayuda"
+          />
+          <small id="eps-pared-ayuda" class="field__hint">Ancho fijo = {{ EPS_PARED_ANCHO }} m</small>
+        </label>
+
+        <div class="actions">
+          <button type="button" class="btn btn--ghost" (click)="cotizarEpsPared()">Cotizar</button>
+          <button
+            type="button"
+            class="btn btn--primary"
+            (click)="pedirEpsPared()"
+            [disabled]="epsFormPared.invalid"
+            [attr.aria-disabled]="epsFormPared.invalid"
+          >
+            Pedir por WhatsApp
+          </button>
+        </div>
+
+        <div class="summary" aria-live="polite">
+          <p>M²: <strong>{{ epsParedM2 | number:'1.2-2' }}</strong></p>
+          <p>Precio m²: <strong>{{ money(epsParedPrecioM2) }}</strong></p>
+          <p>Subtotal: <strong>{{ money(epsParedSubtotal) }}</strong></p>
+          <p>IGV (18%): <strong>{{ money(epsParedIgv) }}</strong></p>
+          <p class="total">Total: <strong>{{ money(epsParedTotal) }}</strong></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= PUR: PARED ================= -->
+  <section
+    *ngIf="material() === 'PUR'"
+    class="panelcalc card container"
+    aria-labelledby="pur-title"
+  >
+    <h3 id="pur-title" class="panelcalc__title">Poliuretano (PUR) – Pared</h3>
+
+    <div class="grid2">
+      <div>
+        <img
+          [src]="images.pur"
+          alt="Panel PUR para pared"
+          width="1200"
+          height="675"
+          (error)="onImgError($event)"
+        />
+        <ul class="facts" role="list">
+          <li>Plancha: <strong>11.95 m × 1.12 m</strong></li>
+          <li>Espesor: <strong>100</strong> o <strong>150 mm</strong></li>
+          <li>Precio unitario mostrado incluye IGV</li>
+        </ul>
+      </div>
+
+      <form
+        [formGroup]="purForm"
+        class="form"
+        novalidate
+        aria-labelledby="pur-title"
+        lang="es-PE"
+      >
+        <label class="field">
+          <span class="field__label">Espesor</span>
+          <select formControlName="espesor">
+            <option value="100">100 mm</option>
+            <option value="150">150 mm</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field__label">Cantidad de planchas</span>
+          <input
+            type="number"
+            formControlName="cantidad"
+            min="1"
+            inputmode="numeric"
+          />
+        </label>
+
+        <div class="actions">
+          <button type="button" class="btn btn--ghost" (click)="cotizarPur()">Cotizar</button>
+          <button
+            type="button"
+            class="btn btn--primary"
+            (click)="pedirPur()"
+            [disabled]="purForm.invalid"
+            [attr.aria-disabled]="purForm.invalid"
+          >
+            Pedir por WhatsApp
+          </button>
+        </div>
+
+        <div class="summary" aria-live="polite">
+          <p>Precio unitario (con IGV): <strong>{{ money(purUnitConIgv) }}</strong></p>
+          <p>Subtotal: <strong>{{ money(purSubtotal) }}</strong></p>
+          <p>IGV (18%): <strong>{{ money(purIgv) }}</strong></p>
+          <p class="total">Total: <strong>{{ money(purTotalConIgv) }}</strong></p>
+        </div>
+      </form>
+    </div>
+  </section>
+</section>

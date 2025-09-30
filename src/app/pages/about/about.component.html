@@ -1,0 +1,160 @@
+<section class="about" aria-labelledby="about-title">
+  <!-- Hero Sobre Nosotros -->
+  <header class="about__hero" role="banner" aria-label="Conócenos">
+    <div class="about__hero-media" aria-hidden="true">
+      <!-- Reemplaza después esta imagen -->
+      <img
+        class="about__hero-img"
+        src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1920&auto=format&fit=crop"
+        alt=""
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="about__hero-overlay" aria-hidden="true"></div>
+      <div class="about__hero-gradient" aria-hidden="true"></div>
+    </div>
+
+    <div class="about__hero-content container">
+      <p class="about__eyebrow">
+        {{ company.location }} · Lima, Perú
+      </p>
+      <h1 id="about-title" class="about__title">
+        Sobre {{ company.name }}
+      </h1>
+      <p class="about__subtitle">
+        Especialistas en <strong>aislamiento térmico</strong> y <strong>frío comercial</strong>:
+        paneles EPS/PUR, puertas y cámaras frigoríficas completas.
+      </p>
+    </div>
+  </header>
+
+  <!-- Cuerpo -->
+  <div class="about__body container">
+    <article class="about__grid">
+      <!-- Quiénes somos -->
+      <section class="card about__section" aria-labelledby="who-title">
+        <figure class="card__media" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?q=80&w=1200&auto=format&fit=crop"
+            alt=""
+            loading="lazy"
+          />
+        </figure>
+        <div class="card__body">
+          <h2 id="who-title" class="card__title">Quiénes somos</h2>
+          <p class="card__text">
+            Somos <strong>{{ company.name }}</strong>, ubicados en
+            <strong>{{ company.location }}</strong>, dedicados a la comercialización de
+            <strong>paneles de poliestireno (EPS)</strong> y
+            <strong>poliuretano (PUR)</strong>, así como a la
+            <strong>fabricación de puertas</strong> y
+            <strong>cámaras frigoríficas</strong> para alimentos, farmacéutico, logística y retail.
+          </p>
+
+          <ul class="about__list" role="list" aria-label="Nuestros servicios principales">
+            <li class="about__list-item" *ngFor="let s of services">
+              <span class="about__list-bullet" aria-hidden="true">•</span>
+              <span class="about__list-text">{{ s }}</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Valores -->
+      <section class="card about__section" aria-labelledby="values-title">
+        <figure class="card__media" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop"
+            alt=""
+            loading="lazy"
+          />
+        </figure>
+        <div class="card__body">
+          <h2 id="values-title" class="card__title">Nuestros valores</h2>
+          <ul class="values" role="list">
+            <li class="value" *ngFor="let v of values">
+              <div class="value__icon" aria-hidden="true">✅</div>
+              <div class="value__content">
+                <h3 class="value__title">{{ v.title }}</h3>
+                <p class="value__desc">{{ v.desc }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Contacto -->
+      <section class="card about__section" aria-labelledby="contact-title">
+        <div class="card__body">
+          <h2 id="contact-title" class="card__title">Contacto</h2>
+          <address class="contact" aria-label="Información de contacto">
+            <p class="contact__row">
+              <span class="contact__label">Ubicación:</span>
+              <span class="contact__value">{{ company.location }}</span>
+            </p>
+            <p class="contact__row">
+              <span class="contact__label">Teléfono:</span>
+              <a class="contact__value" href="tel:+51991038374" aria-label="Llamar a Friosistemas">
+                +51 991 038 374
+              </a>
+            </p>
+            <p class="contact__row">
+              <span class="contact__label">Correo:</span>
+              <a class="contact__value" href="mailto:{{ company.email }}" aria-label="Enviar correo a Friosistemas">
+                {{ company.email }}
+              </a>
+            </p>
+          </address>
+
+          <div class="about__cta">
+            <a class="btn btn--primary" href="https://wa.me/51991038374" target="_blank" rel="noopener"
+               aria-label="Escríbenos por WhatsApp">
+              WhatsApp
+            </a>
+            <a class="btn btn--ghost" routerLink="/cotizar" aria-label="Ir a cotizar tu proyecto">
+              Cotizar proyecto
+            </a>
+          </div>
+
+          <!-- Mapa (placeholder clicable) -->
+          <a
+            class="about__map"
+            href="https://www.google.com/maps/search/?api=1&query=Carapongo+Chosica+Lima+Peru"
+            target="_blank"
+            rel="noopener"
+            aria-label="Abrir ubicación de Friosistemas en Google Maps"
+          >
+            <img
+              src="https://dummyimage.com/800x360/1f2937/ffffff&text=Mapa:+Carapongo,+Chosica,+Lima"
+              alt="Mapa de referencia a Carapongo, Chosica, Lima"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </section>
+    </article>
+
+    <!-- Cifras de confianza -->
+    <section class="about__stats" aria-labelledby="stats-title">
+      <h2 id="stats-title" class="visually-hidden">Nuestras métricas</h2>
+      <ul class="stats" role="list">
+        <li class="stat">
+          <span class="stat__value" aria-label="Más de 500 proyectos">500+</span>
+          <span class="stat__label">Proyectos</span>
+        </li>
+        <li class="stat">
+          <span class="stat__value" aria-label="Aislamiento A+">A+</span>
+          <span class="stat__label">Aislamiento</span>
+        </li>
+        <li class="stat">
+          <span class="stat__value" aria-label="Cobertura nacional">24</span>
+          <span class="stat__label">Regiones</span>
+        </li>
+        <li class="stat">
+          <span class="stat__value" aria-label="Satisfacción 4.9">4.9</span>
+          <span class="stat__label">Satisfacción</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+/* Reset mínimo + fondo global */
+:root { color-scheme: dark; }
+
+html, body {
+  height: 100%;
+  background: #0b1220; /* mismo bg que el home */
+}
+
+body {
+  margin: 0; /* <- quita el marco/blanco por defecto */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+img, picture, video { display: block; max-width: 100%; }
