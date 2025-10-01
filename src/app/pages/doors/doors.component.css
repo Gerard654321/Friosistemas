@@ -1,12 +1,11 @@
 :host {
-  /* Design Variables from home.component.css */
-  --bg: #f8fafc; /* Fondo principal (Gris muy claro) */
-  --surface: #ffffff; /* Superficie (Blanco) */
-  --card: #ffffff; /* Tarjeta (Blanco) */
-  --border: #e2e8f0; /* Borde (Gris claro) */
-  --text: #0f172a; /* Texto principal (Casi negro) */
-  --muted: #64748b; /* Texto secundario (Gris medio) */
-  --primary: #007bff; /* Color primario (Azul) */
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --muted: #64748b;
+  --primary: #007bff;
   --primary-600: #0056b3;
   --accent: #10b981;
   --radius: 14px;
@@ -50,7 +49,6 @@
   border: 0;
 }
 
-/* --- Typo y Secciones --- */
 .section-title {
   font-size: var(--fz-h2);
   font-weight: 800;
@@ -66,9 +64,6 @@
   margin: 0.5rem 0 0;
 }
 
-/* -------------------------------------- */
-/* HERO SECTION (Primer Apartado) */
-/* -------------------------------------- */
 .hero-section {
   position: relative;
   isolation: isolate;
@@ -77,18 +72,14 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-
-  /* IMAGEN DE FONDO */
   background-image: url('/assets/Puertas/Pivotante_02.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-
   padding: clamp(6rem, 14vw, 10rem) 0;
   border-bottom: 1px solid var(--border);
 }
 
-/* Capa base de degradado (Fusión con el fondo) */
 .hero-section::before {
   content: '';
   position: absolute;
@@ -102,7 +93,6 @@
   );
 }
 
-/* Capa de degradado focal (Mejora visual) */
 .hero-gradient-overlay {
   position: absolute;
   inset: 0;
@@ -132,7 +122,6 @@
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* Tipografía mejorada en el Hero */
 .home__title {
   font-weight: 300;
   font-size: clamp(3rem, 5vw + 1rem, 4.5rem);
@@ -160,9 +149,6 @@
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* -------------------------------------- */
-/* LAYOUT DE COTIZACIÓN (GRID) */
-/* -------------------------------------- */
 .doors {
   max-width: 1050px;
   margin: 0 auto;
@@ -171,16 +157,15 @@
 
 .cotizacion-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* Formulario más ancho que Preview */
+  grid-template-columns: 2fr 1fr;
   gap: var(--sp-4);
   align-items: start;
 }
 
-/* ESPACIO ENTRE PASOS 1 Y 2 */
 .doors__form {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-4); /* Espacio entre el Paso 1 y el Paso 2 */
+  gap: var(--sp-4);
 }
 
 .preview-column {
@@ -191,7 +176,6 @@
   top: var(--sp-4);
 }
 
-/* --- Tarjeta Moderna (Card Component) --- */
 .card-modern {
   background: var(--surface);
   border-radius: var(--radius);
@@ -207,7 +191,6 @@
   border-color: var(--primary);
 }
 
-/* --- Headers de Pasos (Step-by-step UI) --- */
 .step-header {
   display: flex;
   align-items: center;
@@ -238,9 +221,6 @@
   box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
 }
 
-/* -------------------------------------- */
-/* REDISEÑO DE LAS CARDS DE OPCIÓN DE PUERTA */
-/* -------------------------------------- */
 .options {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -249,7 +229,7 @@
 }
 
 .option-card {
-  height: 250px; /* Aumentamos la altura para los dos apartados */
+  height: 250px;
   border-radius: var(--radius-sm);
   position: relative;
   cursor: pointer;
@@ -258,9 +238,8 @@
   border: 3px solid transparent;
   box-shadow: var(--shadow-subtle);
   background-color: var(--surface);
-
   display: flex;
-  flex-direction: column; /* Contenido apilado */
+  flex-direction: column;
   filter: grayscale(80%) brightness(85%);
 }
 
@@ -268,11 +247,10 @@
   display: none;
 }
 
-/* Contenedor de la Imagen */
 .option-card::before {
   content: '';
   display: block;
-  height: 60%; /* La imagen ocupa el 60% superior */
+  height: 60%;
   background-size: cover;
   background-position: center;
   transition: all var(--t-fast) ease;
@@ -288,13 +266,12 @@
   background-image: url('/assets/Puertas/Corredera.jpg');
 }
 
-/* Contenedor de Texto e Info (60% inferior) */
 .option-card .card-content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--sp-2) var(--sp-3); /* Padding interno */
+  padding: var(--sp-2) var(--sp-3);
   color: var(--text);
   text-align: left;
 }
@@ -323,14 +300,12 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Efecto al pasar el ratón */
 .option-card:hover {
   transform: translateY(-4px);
   filter: grayscale(0%) brightness(100%);
   box-shadow: var(--shadow-hover);
 }
 
-/* Efecto al seleccionar (Active state) */
 .option-card.active {
   border-color: var(--primary);
   box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3), var(--shadow-hover);
@@ -341,7 +316,6 @@
   background: var(--surface);
 }
 
-/* --- Input Fields & Selects --- */
 .dimensions {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -373,7 +347,6 @@
   background: var(--surface);
 }
 
-/* --- Vista Previa y Resultado --- */
 .doors__preview {
   text-align: center;
 }
@@ -400,7 +373,6 @@
   aspect-ratio: 1/1;
 }
 
-/* Estilo del SVG para que parezca un plano */
 .door-svg {
   background: #f0f4f8;
   border: 1px solid var(--muted);
@@ -417,7 +389,6 @@
   font-size: var(--fz-sm);
 }
 
-/* --- Resultados de Cotización --- */
 .doors__quote {
   text-align: center;
   padding: var(--sp-3);
@@ -453,9 +424,6 @@
   letter-spacing: -1px;
 }
 
-/* -------------------------------------- */
-/* BOTÓN DE WHATSAPP COMPACTO Y CON ÍCONO */
-/* -------------------------------------- */
 .btn {
   --pad-x: 1.6rem;
   --pad-y: 0.9rem;
@@ -504,10 +472,6 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
 }
-
-/* -------------------------------------- */
-/* MEDIA QUERIES (Responsividad) */
-/* -------------------------------------- */
 
 @media (max-width: 900px) {
   .cotizacion-grid {
