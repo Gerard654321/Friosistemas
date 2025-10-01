@@ -1,5 +1,8 @@
 <header class="header">
-  <div class="logo" aria-label="Friosistemas Perú"></div>
+  <a class="logo-container" routerLink="/" aria-label="Friosistemas Perú, ir a página de inicio">
+    <div class="logo-icon"></div>
+    <span class="logo-text">Friosistemas</span>
+  </a>
 
   <div class="header-content" [ngClass]="{'open': isMenuOpen}">
     <nav class="main-nav">
@@ -7,11 +10,12 @@
       <a routerLink="/about" routerLinkActive="active">Conócenos</a>
       <a routerLink="/panels" routerLinkActive="active">Paneles</a>
       <a routerLink="/doors" routerLinkActive="active">Puertas</a>
-      <a routerLink="/cameras" routerLinkActive="active">Camaras F.</a>
+      <a routerLink="/cameras" routerLinkActive="active">Cámaras F.</a>
     </nav>
 
-    <a href="https://wa.me/51991038374" target="_blank" class="whatsapp-button">
-      <i class="fab fa-whatsapp"></i> WhatsApp
+    <a href="https://wa.me/51991038374" target="_blank" class="whatsapp-button" aria-label="Contáctanos por WhatsApp">
+      <fa-icon [icon]="faWhatsapp"></fa-icon>
+      <span>WhatsApp</span>
     </a>
   </div>
 
