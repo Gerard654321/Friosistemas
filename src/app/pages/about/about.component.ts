@@ -14,7 +14,7 @@ export class AboutComponent {
   private meta = inject(Meta);
 
   constructor() {
-    this.title.setTitle('Nosotros | Friosistemas');
+    this.title.setTitle('Nosotros');
     this.meta.updateTag({
       name: 'description',
       content:
