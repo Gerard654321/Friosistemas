@@ -1,172 +1,551 @@
-body {
-  margin: 0;
-  padding: 0;
+:host {
+  /* Design Variables from home.component.css */
+  --bg: #f8fafc; /* Fondo principal (Gris muy claro) */
+  --surface: #ffffff; /* Superficie (Blanco) */
+  --card: #ffffff; /* Tarjeta (Blanco) */
+  --border: #e2e8f0; /* Borde (Gris claro) */
+  --text: #0f172a; /* Texto principal (Casi negro) */
+  --muted: #64748b; /* Texto secundario (Gris medio) */
+  --primary: #007bff; /* Color primario (Azul) */
+  --primary-600: #0056b3;
+  --accent: #10b981;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 6px 15px rgba(0, 0, 0, 0.1);
+  --container-w: 1280px;
+  --sp-1: 0.5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2rem;
+  --sp-6: 3rem;
+  --sp-8: 4rem;
+  --fz-xs: 0.85rem;
+  --fz-sm: 0.95rem;
+  --fz-md: 1rem;
+  --fz-lg: 1.1rem;
+  --fz-xl: clamp(2.5rem, 4vw + 1rem, 3.5rem);
+  --fz-h2: clamp(1.6rem, 2vw + 1rem, 2.5rem);
+  --t-fast: 200ms;
+  --t-slow: 450ms;
+
+  display: block;
+  background-color: var(--bg);
+}
+
+.container {
+  max-width: var(--container-w);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Typo y Secciones --- */
+.section-title {
+  font-size: var(--fz-h2);
+  font-weight: 800;
+  text-align: center;
+  margin: var(--sp-6) 0 var(--sp-3);
+  color: var(--text);
+}
+
+.section-title-subtitle {
+  font-size: var(--fz-md);
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+}
+
+/* -------------------------------------- */
+/* HERO SECTION (Primer Apartado) */
+/* -------------------------------------- */
+.hero-section {
+  position: relative;
+  isolation: isolate;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  /* IMAGEN DE FONDO */
   background-image: url('/assets/Puertas/Pivotante_02.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  font-family: sans-serif;
+
+  padding: clamp(6rem, 14vw, 10rem) 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.doors {
-  max-width: 950px;
-  margin: 2rem auto;
-  padding: 2.5rem;
-  background: rgba(15, 23, 42, 0.3);
-  backdrop-filter: blur(6px);
-  border-radius: 1.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  color: var(--text);
-  text-align: center;
+/* Capa base de degradado (Fusión con el fondo) */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.6) 0%,
+    rgba(15, 23, 42, 0.4) 60%,
+    var(--bg) 100%
+  );
 }
 
-.doors__header h2 {
-  font-size: 2.2rem;
-  font-weight: 800;
+/* Capa de degradado focal (Mejora visual) */
+.hero-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.3) 80%
+  );
+  opacity: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+.hero-eyebrow {
   color: var(--primary);
-  margin-bottom: 0.5rem;
+  font-size: var(--fz-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+  margin: 0 0 var(--sp-1);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
-.doors__header p {
-  color: var(--muted);
-  margin-bottom: 2rem;
+
+/* Tipografía mejorada en el Hero */
+.home__title {
+  font-weight: 300;
+  font-size: clamp(3rem, 5vw + 1rem, 4.5rem);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
+  color: var(--surface);
+  margin: 0 0 var(--sp-2);
 }
-.options {
+
+.home__title-accent {
+  display: block;
+  font-size: clamp(1.8rem, 2.5vw + 1rem, 2.8rem);
+  font-weight: 800;
+  color: var(--surface);
+  margin-top: 0.5rem;
+  line-height: 1.1;
+}
+
+.home__subtitle {
+  margin: 0 auto var(--sp-3);
+  max-width: 80ch;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: var(--fz-lg);
+  line-height: 1.65;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* -------------------------------------- */
+/* LAYOUT DE COTIZACIÓN (GRID) */
+/* -------------------------------------- */
+.doors {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: var(--sp-2) 0 var(--sp-8);
+}
+
+.cotizacion-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Formulario más ancho que Preview */
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+/* ESPACIO ENTRE PASOS 1 Y 2 */
+.doors__form {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  flex-direction: column;
+  gap: var(--sp-4); /* Espacio entre el Paso 1 y el Paso 2 */
 }
+
+.preview-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  position: sticky;
+  top: var(--sp-4);
+}
+
+/* --- Tarjeta Moderna (Card Component) --- */
+.card-modern {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-subtle);
+  transition: all var(--t-fast) ease;
+}
+
+.card-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary);
+}
+
+/* --- Headers de Pasos (Step-by-step UI) --- */
+.step-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--sp-3);
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: var(--sp-2);
+}
+
+.step-header h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0;
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--surface);
+  font-weight: 700;
+  font-size: var(--fz-lg);
+  margin-right: var(--sp-2);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+/* -------------------------------------- */
+/* REDISEÑO DE LAS CARDS DE OPCIÓN DE PUERTA */
+/* -------------------------------------- */
+.options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
 .option-card {
-  flex: 1;
-  height: 200px;
-  border-radius: 1rem;
+  height: 250px; /* Aumentamos la altura para los dos apartados */
+  border-radius: var(--radius-sm);
   position: relative;
   cursor: pointer;
   overflow: hidden;
-  transition: transform 0.3s, border 0.3s;
+  transition: all var(--t-fast) ease;
   border: 3px solid transparent;
+  box-shadow: var(--shadow-subtle);
+  background-color: var(--surface);
+
+  display: flex;
+  flex-direction: column; /* Contenido apilado */
+  filter: grayscale(80%) brightness(85%);
 }
+
 .option-card input {
   display: none;
 }
-.option-card .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
+
+/* Contenedor de la Imagen */
+.option-card::before {
+  content: '';
+  display: block;
+  height: 60%; /* La imagen ocupa el 60% superior */
+  background-size: cover;
+  background-position: center;
+  transition: all var(--t-fast) ease;
+  border-bottom: 1px solid var(--border);
+}
+.option-card.batiente::before {
+  background-image: url('/assets/Puertas/Pivotante.jpg');
+}
+.option-card.vaiven::before {
+  background-image: url('/assets/Puertas/Vaiven.jpg');
+}
+.option-card.corrediza::before {
+  background-image: url('/assets/Puertas/Corredera.jpg');
+}
+
+/* Contenedor de Texto e Info (60% inferior) */
+.option-card .card-content {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 1rem;
+  justify-content: space-between;
+  padding: var(--sp-2) var(--sp-3); /* Padding interno */
+  color: var(--text);
   text-align: left;
-  transition: background 0.3s;
 }
+
 .option-card h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
   margin: 0;
-  font-size: 1.3rem;
-  font-weight: 700;
 }
+
 .option-card p {
-  margin: 0.2rem 0 0;
-  font-size: 1rem;
+  margin: 0.2rem 0 0.5rem;
+  font-size: var(--fz-xs);
+  color: var(--muted);
+  line-height: 1.4;
 }
+
+.price-tag {
+  background: var(--primary);
+  color: var(--surface);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--fz-xs);
+  font-weight: 700;
+  align-self: flex-start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto al pasar el ratón */
 .option-card:hover {
-  transform: scale(1.05);
+  transform: translateY(-4px);
+  filter: grayscale(0%) brightness(100%);
+  box-shadow: var(--shadow-hover);
 }
+
+/* Efecto al seleccionar (Active state) */
 .option-card.active {
   border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3), var(--shadow-hover);
+  transform: scale(1.02);
+  filter: grayscale(0%) brightness(100%);
 }
-.option-card.batiente {
-  background: url('/assets/Puertas/Pivotante.jpg') center/cover no-repeat;
+.option-card.active .card-content {
+  background: var(--surface);
 }
-.option-card.vaiven {
-  background: url('/assets/Puertas/Vaiven.jpg') center/cover no-repeat;
-}
-.option-card.corrediza {
-  background: url('/assets/Puertas/Corredera.jpg') center/cover no-repeat;
-}
+
+/* --- Input Fields & Selects --- */
 .dimensions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
 }
-.dimensions div {
-  flex: 1;
-  text-align: left;
-}
-.dimensions label {
+
+.form-group label {
   font-weight: 600;
-  margin-bottom: 0.3rem;
-  display: block;
 }
+
 .dimensions input,
-.dimensions select {
+.form-group select {
   width: 100%;
-  padding: 0.6rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--border);
-  background: var(--card);
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  background: var(--bg);
   color: var(--text);
-  font-size: 1rem;
-  transition: border 0.3s, box-shadow 0.3s;
+  font-size: var(--fz-md);
+  transition: all var(--t-fast) ease;
 }
+
 .dimensions input:focus,
-.dimensions select:focus {
-  border-color: var(--primary);
+.form-group select:focus {
+  border-color: var(--primary-600);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+  background: var(--surface);
 }
+
+/* --- Vista Previa y Resultado --- */
 .doors__preview {
-  margin: 2.5rem 0;
+  text-align: center;
 }
-.doors__preview h3 {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
+
+.preview-title {
   font-weight: 700;
   color: var(--muted);
+  font-size: var(--fz-sm);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
 }
+
 .preview-wrapper {
-  margin: 0 auto;
-  background: #f3f4f6;
-  border: 2px dashed #1f2937;
-  border-radius: 0.75rem;
-  padding: 1rem;
+  margin: var(--sp-3) auto 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-2);
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  max-width: 100%;
+  aspect-ratio: 1/1;
 }
+
+/* Estilo del SVG para que parezca un plano */
 .door-svg {
-  background: #fff;
-  border: 2px solid #1f2937;
-  border-radius: 0.5rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background: #f0f4f8;
+  border: 1px solid var(--muted);
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+  max-width: 100%;
+  height: auto;
+  transition: all var(--t-slow) ease;
 }
+
+.empty-preview-text {
+  color: var(--muted);
+  font-style: italic;
+  font-size: var(--fz-sm);
+}
+
+/* --- Resultados de Cotización --- */
 .doors__quote {
-  margin: 1.5rem 0;
-  font-size: 1.2rem;
-}
-.doors__quote .price {
-  color: var(--primary);
-  font-size: 1.6rem;
-  font-weight: 800;
-}
-.btn-whatsapp {
-  background: #25d366;
-  color: #fff;
-  padding: 1rem 2rem;
-  border-radius: 0.75rem;
+  text-align: center;
+  padding: var(--sp-3);
   border: none;
-  cursor: pointer;
-  font-size: 1rem;
+  box-shadow: none;
+  background: transparent;
+  margin-top: var(--sp-4);
+}
+
+.doors__quote p {
+  margin: 0 0 var(--sp-1);
+  font-size: var(--fz-md);
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.doors__quote strong {
+  color: var(--text);
+}
+
+.final-price-label {
   font-weight: 600;
+  color: var(--text) !important;
+  margin-top: var(--sp-2);
+}
+
+.final-price {
+  color: var(--primary);
+  font-size: 2.8rem;
+  font-weight: 900;
+  display: block;
+  margin-top: var(--sp-1);
+  letter-spacing: -1px;
+}
+
+/* -------------------------------------- */
+/* BOTÓN DE WHATSAPP COMPACTO Y CON ÍCONO */
+/* -------------------------------------- */
+.btn {
+  --pad-x: 1.6rem;
+  --pad-y: 0.9rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  transition: transform 0.2s, background 0.3s;
+  justify-content: center;
+  padding: var(--pad-y) var(--pad-x);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform var(--t-fast) ease, background var(--t-fast) ease,
+    border-color var(--t-fast) ease, box-shadow var(--t-fast) ease;
+  cursor: pointer;
+  white-space: nowrap;
 }
-.btn-whatsapp:hover {
+
+.btn--lg {
+  --pad-y: 1rem;
+  --pad-x: 2rem;
+  font-size: var(--fz-lg);
+}
+
+.btn--whatsapp {
+  background: #25d366;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  display: inline-flex;
+  gap: var(--sp-1);
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--whatsapp i {
+  font-size: 1.35em;
+  margin-right: 0.25rem;
+}
+
+.btn--whatsapp:hover {
   background: #1ebe5d;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
 }
-.btn-whatsapp i {
-  font-size: 1.3rem;
+
+/* -------------------------------------- */
+/* MEDIA QUERIES (Responsividad) */
+/* -------------------------------------- */
+
+@media (max-width: 900px) {
+  .cotizacion-grid {
+    grid-template-columns: 1fr;
+  }
+  .preview-column {
+    position: static;
+  }
+  .doors {
+    padding: var(--sp-4) 0 var(--sp-6);
+  }
+}
+
+@media (max-width: 640px) {
+  .options {
+    grid-template-columns: 1fr;
+  }
+  .hero-section {
+    min-height: 350px;
+    padding: var(--sp-6) 0;
+  }
+  .home__title {
+    font-size: clamp(2.5rem, 8vw, 3rem);
+  }
+  .home__title-accent {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+  }
+  .form-step {
+    padding: var(--sp-3);
+  }
+  .step-header h3 {
+    font-size: 1.25rem;
+  }
+  .dimensions {
+    grid-template-columns: 1fr;
+  }
+  .btn--whatsapp {
+    width: 100%;
+    margin-inline: 0;
+  }
 }
