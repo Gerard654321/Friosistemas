@@ -1,283 +1,246 @@
 <section class="panels" aria-labelledby="panels-title">
   <header class="panels__hero" role="banner" aria-label="Cotizador de cámaras frigoríficas">
-        <div
-            class="panels__hero-bg"
-            [style.background-image]="
-            'linear-gradient(180deg, rgba(11,18,32,.05) 0%, rgba(11,18,32,.72) 60%, var(--bg) 100%), url(' + images.heroBg + ')'
-            "
-            style="background-position: center; background-size: cover; background-repeat: no-repeat;"
-        ></div>
-        <div class="panels__hero-content">
-            <h1 id="panels-title" class="panels__title">Diseña y Cotiza tu Cámara Frigorífica</h1>
-            <p class="panels__subtitle">
-                Selecciona, dimensiona y calcula el costo total con claridad y precisión.
-            </p>
-        </div>
-    </header>
-
-    <div class="container">
-        <fieldset class="step-group" aria-label="Paso 1: Selección de Material">
-            <legend class="section-title">1. Escoge el material de la cámara</legend>
-            <div class="selector-cards">
-                @for (option of materialOptions; track option.value) {
-                    <label
-                        class="card material-card"
-                        [class.active]="material() === option.value"
-                        [attr.aria-checked]="material() === option.value"
-                        role="radio"
-                        tabindex="0"
-                    >
-                        <input
-                            type="radio"
-                            name="material"
-                            [value]="option.value"
-                            (change)="material.set(option.value)"
-                            [checked]="material() === option.value"
-                            [attr.aria-label]="'Seleccionar ' + option.name"
-                        />
-                        <div class="material__media">
-                            <img
-                                [src]="option.image"
-                                [alt]="option.name + ' - ' + option.description"
-                                (error)="onImgError($event)"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="material__body">
-                            <span class="material__name">{{ option.name }}</span>
-                            <span class="material__description">{{ option.description }}</span>
-                        </div>
-                    </label>
-                }
-            </div>
-        </fieldset>
-
-        <fieldset class="step-group" aria-label="Paso 2: Selección de Tipo de Puerta">
-            <legend class="section-title">2. Elige el tipo de puerta</legend>
-            <div class="selector-cards">
-                @for (option of puertaOptions; track option.value) {
-                    <label
-                        class="card puerta-card"
-                        [class.active]="puertaTipo() === option.value"
-                        [attr.aria-checked]="puertaTipo() === option.value"
-                        role="radio"
-                        tabindex="0"
-                    >
-                        <input
-                            type="radio"
-                            name="puerta"
-                            [value]="option.value"
-                            (change)="puertaTipo.set(option.value)"
-                            [checked]="puertaTipo() === option.value"
-                            [attr.aria-label]="'Seleccionar puerta ' + option.name"
-                        />
-                        <div class="material__media">
-                            <img
-                                [src]="option.image"
-                                [alt]="option.name + ' puerta frigorífica'"
-                                (error)="onImgError($event)"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div class="material__body">
-                            <span class="material__name">{{ option.name }}</span>
-                            <span class="material__description">Costo Fijo</span>
-                        </div>
-                    </label>
-                }
-            </div>
-        </fieldset>
-
-        <section class="calc-panel" aria-label="Paso 3, 4, 5 y Resumen de Cotización">
-            <div class="calc-inputs">
-                <fieldset class="input-group">
-                    <legend class="section-title section-title--small">3. Ingresa las dimensiones</legend>
-                    <div class="dimensions-section">
-                        <div class="plano-container">
-                            <img
-                                [src]="images.planoCamara"
-                                alt="Diagrama de cámara frigorífica con Ancho, Alto y Largo"
-                                class="plano-image"
-                            />
-                        </div>
-                        <form [formGroup]="medidasForm" class="form-group" aria-label="Entrada de dimensiones">
-                            <label class="field">
-                                <span class="field__label">Ancho (m)</span>
-                                <input
-                                    type="number"
-                                    formControlName="ancho"
-                                    (input)="medidasForm.controls.ancho.setValue(parseValue($event.target.value))"
-                                    min="0.5"
-                                    step="0.1"
-                                    placeholder="Ej: 2.0"
-                                    aria-label="Ancho en metros de la cámara"
-                                />
-                            </label>
-                            <label class="field">
-                                <span class="field__label">Alto (m)</span>
-                                <input
-                                    type="number"
-                                    formControlName="alto"
-                                    (input)="medidasForm.controls.alto.setValue(parseValue($event.target.value))"
-                                    min="0.5"
-                                    step="0.1"
-                                    placeholder="Ej: 2.5"
-                                    aria-label="Alto en metros de la cámara"
-                                />
-                            </label>
-                            <label class="field">
-                                <span class="field__label">Largo (m)</span>
-                                <input
-                                    type="number"
-                                    formControlName="largo"
-                                    (input)="medidasForm.controls.largo.setValue(parseValue($event.target.value))"
-                                    min="0.5"
-                                    step="0.1"
-                                    placeholder="Ej: 2.0"
-                                    aria-label="Largo en metros de la cámara"
-                                />
-                            </label>
-                        </form>
-                    </div>
-                    <button
-                      type="button"
-                      class="btn-cotizar"
-                      (click)="forzarCotizacion()"
-                      [disabled]="medidasForm.invalid"
-                    >
-                      Actualizar Cotización 🔄
-                    </button>
-                    </fieldset>
-
-                <fieldset class="input-group">
-                    <legend class="section-title section-title--small">4. Potencia del Motor (Equipo)</legend>
-                    <div class="selector">
-                        @for (motor of motorOptions; track motor.value) {
-                            <label class="chip" tabindex="0">
-                                <input
-                                    type="radio"
-                                    name="motorHP"
-                                    [value]="motor.value"
-                                    (change)="motorHP.set(motor.value)"
-                                    [checked]="motorHP() === motor.value"
-                                    [attr.aria-label]="'Motor de ' + motor.name"
-                                />
-                                {{ motor.name }} <span *ngIf="motor.incremento > 0" class="text-secondary"></span>
-                            </label>
-                        }
-                    </div>
-                </fieldset>
-
-                <fieldset class="input-group">
-                    <legend class="section-title section-title--small">5. Entrega y Servicio</legend>
-                    <div class="selector">
-                        <label class="chip" tabindex="0">
-                            <input
-                                type="radio"
-                                name="instalacion"
-                                value="recoger"
-                                (change)="instalacion.set('recoger')"
-                                [checked]="instalacion() === 'recoger'"
-                                aria-label="Seleccionar recoger en local"
-                            />
-                            Recojo en nuestro local
-                        </label>
-                        <label class="chip" tabindex="0">
-                            <input
-                                type="radio"
-                                name="instalacion"
-                                value="instalar"
-                                (change)="instalacion.set('instalar')"
-                                [checked]="instalacion() === 'instalar'"
-                                aria-label="Seleccionar instalación en el sitio"
-                            />
-                            Instalar fuera de Lima
-                        </label>
-                    </div>
-                </fieldset>
-
-                @if (instalacion() === 'instalar') {
-                    <fieldset class="input-group">
-                        <legend class="section-title section-title--small">Ubicación de instalación</legend>
-                        <div class="selector">
-                            @for (ubicacion of ubicacionOptions; track ubicacion.value) {
-                                <label class="chip" tabindex="0">
-                                    <input
-                                        type="radio"
-                                        name="ubicacion"
-                                        [value]="ubicacion.value"
-                                        (change)="instalacionUbicacion.set(ubicacion.value)"
-                                        [checked]="instalacionUbicacion() === ubicacion.value"
-                                        [attr.aria-label]="'Instalación en ' + ubicacion.name"
-                                    />
-                                    {{ ubicacion.name }} <span class="text-secondary">(+{{ ubicacion.costo | currency:'USD':'symbol':'1.0-0' }})</span>
-                                </label>
-                            }
-                        </div>
-                    </fieldset>
-                }
-            </div>
-
-            <div class="summary" aria-label="Resumen de costos">
-                <h3 class="panelcalc__title">Resumen de Cotización</h3>
-                <ul class="facts">
-                    <li class="dimension-line">
-                        Superficie Base (A x L):
-                        <strong>{{ superficieBase() | number:'1.2-2' }} m²</strong>
-                    </li>
-                    <li class="volume-line">
-                        Volumen Total (m³):
-                        <strong>{{ m3() | number:'1.2-2' }} m³</strong>
-                    </li>
-                    <li>
-                        Material:
-                        <strong>{{ material() }}</strong>
-                    </li>
-
-                    <li [class.total-oferta-line]="aplicaOfertaFija()" [class.subtotal-line]="!aplicaOfertaFija()">
-                        Costo Base (Material + Motor 2HP):
-                        <strong [class.text-muted]="costoBaseTotal() === 0">
-                            {{ costoBaseTotal() | currency:'USD':'symbol':'1.0-2' }}
-                        </strong>
-                    </li>
-
-                    <li>
-                        Costo Puerta Adicional ({{ puertaTipo() | titlecase }}):
-                        <strong>
-                            {{ costoPuertaAdicional() | currency:'USD':'symbol':'1.0-2' }}
-                            <span *ngIf="aplicaOfertaFija() && puertaTipo() === 'batiente'" class="text-muted">(Incluida en Base)</span>
-                            <span *ngIf="aplicaOfertaFija() && puertaTipo() !== 'batiente'" class="text-muted">(Dif. sobre Batiente)</span>
-                        </strong>
-                    </li>
-
-                    <li *ngIf="costoMotorAdicional() > 0">
-                        Costo Motor Adicional ({{ motorHP() }} HP):
-                        <strong>+{{ costoMotorAdicional() | currency:'USD':'symbol':'1.0-2' }}</strong>
-                    </li>
-
-                    <li *ngIf="costoInstalacion() > 0">
-                        Costo Instalación ({{ instalacionUbicacion() | titlecase }}):
-                        <strong>+{{ costoInstalacion() | currency:'USD':'symbol':'1.0-2' }}</strong>
-                    </li>
-
-                    <li class="total-sin-igv">
-                        Total sin IGV:
-                        <strong>{{ totalSinIgv() | currency:'USD':'symbol':'1.0-2' }}</strong>
-                    </li>
-                    <li>
-                        IGV ({{ IGV * 100 }}%):
-                        <strong>{{ igv() | currency:'USD':'symbol':'1.0-2' }}</strong>
-                    </li>
-                    <li class="total">
-                        Total con IGV:
-                        <strong>{{ totalConIgv() | currency:'USD':'symbol':'1.0-2' }}</strong>
-                    </li>
-                    <li class="service-line">
-                        Servicio:
-                        <strong>{{ instalacion() === 'recoger' ? 'Recoger en local' : 'Instalar en ' + (instalacionUbicacion() | titlecase) }}</strong>
-                    </li>
-                </ul>
-            </div>
-        </section>
+    <div
+      class="panels__hero-bg"
+      [style.background-image]="
+        'linear-gradient(180deg, rgba(11,18,32,.05) 0%, rgba(11,18,32,.72) 60%, var(--bg) 100%), url(' + images.heroBg + ')'
+      "
+      style="background-position: center; background-size: cover; background-repeat: no-repeat;"
+    ></div>
+    <div class="panels__hero-content">
+      <h1 id="panels-title" class="panels__title">Diseña tu Cámara Frigorífica</h1>
+      <p class="panels__subtitle">
+        Selecciona los elementos y obtén la información completa de tu cámara.
+      </p>
     </div>
+  </header>
+
+  <div class="container">
+    <fieldset class="step-group" aria-label="Paso 1: Selección de Material">
+      <legend class="section-title">1. Escoge el material de la cámara</legend>
+      <div class="selector-cards">
+        @for (option of materialOptions; track option.value) {
+        <label
+          class="card material-card"
+          [class.active]="material() === option.value"
+          [attr.aria-checked]="material() === option.value"
+          role="radio"
+          tabindex="0"
+        >
+          <input
+            type="radio"
+            name="material"
+            [value]="option.value"
+            (change)="material.set(option.value)"
+            [checked]="material() === option.value"
+            [attr.aria-label]="'Seleccionar ' + option.name"
+          />
+          <div class="material__media">
+            <img
+              [src]="option.image"
+              [alt]="option.name + ' - ' + option.description"
+              (error)="onImgError($event)"
+              loading="lazy"
+            />
+          </div>
+          <div class="material__body">
+            <span class="material__name">{{ option.name }}</span>
+          </div>
+        </label>
+        }
+      </div>
+    </fieldset>
+
+    <fieldset class="step-group" aria-label="Paso 2: Selección de Tipo de Puerta">
+      <legend class="section-title">2. Elige el tipo de puerta</legend>
+      <div class="selector-cards">
+        @for (option of puertaOptions; track option.value) {
+        <label
+          class="card puerta-card"
+          [class.active]="puertaTipo() === option.value"
+          [attr.aria-checked]="puertaTipo() === option.value"
+          role="radio"
+          tabindex="0"
+        >
+          <input
+            type="radio"
+            name="puerta"
+            [value]="option.value"
+            (change)="puertaTipo.set(option.value)"
+            [checked]="puertaTipo() === option.value"
+            [attr.aria-label]="'Seleccionar puerta ' + option.name"
+          />
+          <div class="material__media">
+            <img
+              [src]="option.image"
+              [alt]="option.name + ' puerta frigorífica'"
+              (error)="onImgError($event)"
+              loading="lazy"
+            />
+          </div>
+          <div class="material__body">
+            <span class="material__name">{{ option.name }}</span>
+          </div>
+        </label>
+        }
+      </div>
+    </fieldset>
+
+    <section class="calc-panel" aria-label="Dimensiones y resumen">
+      <div class="calc-inputs">
+        <fieldset class="input-group">
+          <legend class="section-title section-title--small">3. Ingresa las dimensiones</legend>
+          <div class="dimensions-section">
+            <div class="plano-container">
+              <img
+                [src]="images.planoCamara"
+                alt="Diagrama de cámara frigorífica con Ancho, Alto y Largo"
+                class="plano-image"
+              />
+            </div>
+            <form
+              [formGroup]="medidasForm"
+              class="form-group"
+              aria-label="Entrada de dimensiones"
+            >
+              <label class="field">
+                <span class="field__label">Ancho (m)</span>
+                <input
+                  type="number"
+                  formControlName="ancho"
+                  (input)="medidasForm.controls.ancho.setValue(parseValue($event.target.value))"
+                  min="0.5"
+                  step="0.1"
+                  placeholder="Ej: 2.0"
+                  aria-label="Ancho en metros de la cámara"
+                />
+              </label>
+
+              <label class="field">
+                <span class="field__label">Alto (m)</span>
+                <input
+                  type="number"
+                  formControlName="alto"
+                  (input)="medidasForm.controls.alto.setValue(parseValue($event.target.value))"
+                  min="0.5"
+                  step="0.1"
+                  placeholder="Ej: 2.5"
+                  aria-label="Alto en metros de la cámara"
+                />
+              </label>
+
+              <label class="field">
+                <span class="field__label">Largo (m)</span>
+                <input
+                  type="number"
+                  formControlName="largo"
+                  (input)="medidasForm.controls.largo.setValue(parseValue($event.target.value))"
+                  min="0.5"
+                  step="0.1"
+                  placeholder="Ej: 2.0"
+                  aria-label="Largo en metros de la cámara"
+                />
+              </label>
+            </form>
+          </div>
+        </fieldset>
+
+        <fieldset class="input-group">
+          <legend class="section-title section-title--small">4. Potencia del Motor (Equipo)</legend>
+          <div class="selector">
+            @for (motor of motorOptions; track motor.value) {
+            <label class="chip" tabindex="0">
+              <input
+                type="radio"
+                name="motorHP"
+                [value]="motor.value"
+                (change)="motorHP.set(motor.value)"
+                [checked]="motorHP() === motor.value"
+                [attr.aria-label]="'Motor de ' + motor.name"
+              />
+              {{ motor.name }}
+            </label>
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="input-group">
+          <legend class="section-title section-title--small">5. Entrega y Servicio</legend>
+          <div class="selector">
+            <label class="chip" tabindex="0">
+              <input
+                type="radio"
+                name="instalacion"
+                value="recoger"
+                (change)="instalacion.set('recoger')"
+                [checked]="instalacion() === 'recoger'"
+                aria-label="Seleccionar recoger en local"
+              />
+              Recoger en nuestro local
+            </label>
+            <label class="chip" tabindex="0">
+              <input
+                type="radio"
+                name="instalacion"
+                value="instalar"
+                (change)="instalacion.set('instalar')"
+                [checked]="instalacion() === 'instalar'"
+                aria-label="Seleccionar instalación en el sitio"
+              />
+              Instalación donde usted desee
+            </label>
+          </div>
+        </fieldset>
+
+        @if (instalacion() === 'instalar') {
+        <fieldset class="input-group">
+          <legend class="section-title section-title--small">Ubicación de instalación</legend>
+          <div class="selector">
+            @for (ubicacion of ubicacionOptions; track ubicacion.value) {
+            <label class="chip" tabindex="0">
+              <input
+                type="radio"
+                name="ubicacion"
+                [value]="ubicacion.value"
+                (change)="instalacionUbicacion.set(ubicacion.value)"
+                [checked]="instalacionUbicacion() === ubicacion.value"
+                [attr.aria-label]="'Instalación en ' + ubicacion.name"
+              />
+              {{ ubicacion.name }}
+            </label>
+            }
+          </div>
+        </fieldset>
+        }
+      </div>
+
+      <div class="summary" aria-label="Resumen de selección">
+        <h3 class="panelcalc__title">Resumen de Selección</h3>
+        <ul class="facts">
+          <li>Tipo de panel: <strong>{{ material() }}</strong></li>
+          <li>Tipo de puerta: <strong>{{ puertaTipo() | titlecase }}</strong></li>
+          <li>Tipo de motor: <strong>{{ motorHP() }} HP</strong></li>
+          <li>
+            Dimensiones de la cámara:
+            <strong
+              >{{ medidasForm.value.ancho }}m (Ancho) × {{ medidasForm.value.alto }}m (Alto) ×
+              {{ medidasForm.value.largo }}m (Largo)</strong
+            >
+          </li>
+          <li>
+            Servicio:
+            <strong>
+              {{ instalacion() === 'recoger'
+                ? 'Recoger en local'
+                : 'Instalar en ' + (instalacionUbicacion() | titlecase) }}
+            </strong>
+          </li>
+        </ul>
+
+        <button type="button" class="btn-cotizar" (click)="contactarAsesor()">
+          Contactarse con un asesor para finalizar la solicitud
+        </button>
+      </div>
+    </section>
+  </div>
 </section>
