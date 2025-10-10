@@ -124,22 +124,22 @@ export class PanelsComponent {
 
   pedirEpsTecho() {
     const cant = this.epsTechoCantidad;
-    const msg = `Hola, estoy interesado en comprar ${cant} planchas de paneles EPS para techo (3.00m x 1.16m, 200mm). Total aprox: ${this.money(this.epsTechoTotal)}`;
-    window.open(this.wa('51991038374', msg), '_blank');
+    const msg = `Hola, estoy interesado en comprar ${cant} planchas de paneles EPS para techo (3.00m x 1.16m, 200mm).`;
+    window.open(this.wa('51998691832', msg), '_blank');
   }
 
   pedirEpsPared() {
     const largo = this.epsParedLargo;
     const esp = this.epsParedEspesor;
-    const msg = `Hola, estoy interesado en paneles EPS para pared de ${esp}mm, ${largo}m de largo (ancho 1.16m). Total aprox: ${this.money(this.epsParedTotal)}`;
-    window.open(this.wa('51991038374', msg), '_blank');
+    const msg = `Hola, estoy interesado en paneles EPS para pared de ${esp}mm, ${largo}m de largo (ancho 1.16m).`;
+    window.open(this.wa('51998691832', msg), '_blank');
   }
 
   pedirPur() {
     const cant = this.purCantidad;
     const esp = this.purEspesor;
-    const msg = `Hola, estoy interesado en ${cant} planchas de panel PUR de ${esp}mm. Total aprox: ${this.money(this.purTotalConIgv)}`;
-    window.open(this.wa('51991038374', msg), '_blank');
+    const msg = `Hola, estoy interesado en ${cant} planchas de panel PUR de ${esp}mm.`;
+    window.open(this.wa('51998691832', msg), '_blank');
   }
 
   onImgError(ev: Event) {

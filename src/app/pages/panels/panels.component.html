@@ -37,10 +37,6 @@
           <p class="material__text">
             Plancha de <strong>3.00 m × 1.16 m</strong> con un espesor de <strong>200 mm</strong>.
           </p>
-          <ul class="facts" role="list" aria-label="Características y precios">
-            <li>Área por plancha: <strong>{{ epsTechoM2PorPlacha | number:'1.2-2' }} m²</strong></li>
-            <li>Precio de referencia: <strong>{{ money(EPS_TECHO_PRECIO_M2) }}</strong> / m² (sin IGV)</li>
-          </ul>
         </div>
       </article>
 
@@ -60,10 +56,6 @@
           <p class="material__text">
             Cuenta con un ancho de <strong>1.16 m</strong>, contamos con espesores de <strong>100 mm</strong> y <strong>200 mm</strong>.
           </p>
-          <ul class="facts" role="list" aria-label="Características y precios">
-            <li>Precio 100 mm: <strong>{{ money(EPS_PARED_PRECIO_100) }}</strong> / m² (sin IGV)</li>
-            <li>Precio 200 mm: <strong>{{ money(EPS_PARED_PRECIO_200) }}</strong> / m² (sin IGV)</li>
-          </ul>
         </div>
       </article>
 
@@ -83,10 +75,6 @@
           <p class="material__text">
             Plancha de <strong>11.95 m × 1.12 m</strong>, contamos con espesores de <strong>100</strong> y <strong>150 mm</strong>.
           </p>
-          <ul class="facts" role="list" aria-label="Características y precios">
-            <li>Precio 100 mm: <strong>{{ money(PUR_PRECIO_100_CON_IGV) }}</strong> (con IGV)</li>
-            <li>Precio 150 mm: <strong>{{ money(PUR_PRECIO_150_CON_IGV) }}</strong> (con IGV)</li>
-          </ul>
         </div>
       </article>
     </article>
@@ -169,7 +157,6 @@
         <ul class="facts" role="list">
           <li>Plancha: <strong>3.00 m × 1.16 m</strong> ({{ epsTechoM2PorPlacha | number:'1.2-2' }} m²)</li>
           <li>Espesor: <strong>200 mm</strong></li>
-          <li>Precio base: <strong>{{ money(EPS_TECHO_PRECIO_M2) }}</strong> / m² (sin IGV)</li>
         </ul>
       </div>
 
@@ -193,7 +180,6 @@
         </label>
 
         <div class="actions">
-          <button type="button" class="btn btn--ghost" (click)="cotizarEpsTecho()">Cotizar</button>
           <button
             type="button"
             class="btn btn--primary"
@@ -201,15 +187,8 @@
             [disabled]="epsFormTecho.invalid"
             [attr.aria-disabled]="epsFormTecho.invalid"
           >
-            Pedir por WhatsApp
+            Conversar con un asesor
           </button>
-        </div>
-
-        <div class="summary" aria-live="polite">
-          <p>M² por plancha: <strong>{{ epsTechoM2PorPlacha | number:'1.2-2' }}</strong></p>
-          <p>Subtotal: <strong>{{ money(epsTechoSubtotal) }}</strong></p>
-          <p>IGV (18%): <strong>{{ money(epsTechoIgv) }}</strong></p>
-          <p class="total">Total: <strong>{{ money(epsTechoTotal) }}</strong></p>
         </div>
       </form>
     </div>
@@ -234,8 +213,6 @@
         <ul class="facts" role="list">
           <li>Ancho fijo: <strong>{{ EPS_PARED_ANCHO }} m</strong></li>
           <li>Espesor: <strong>100</strong> o <strong>200 mm</strong></li>
-          <li>Precio 100 mm: <strong>{{ money(EPS_PARED_PRECIO_100) }}</strong> / m² (sin IGV)</li>
-          <li>Precio 200 mm: <strong>{{ money(EPS_PARED_PRECIO_200) }}</strong> / m² (sin IGV)</li>
         </ul>
       </div>
 
@@ -268,7 +245,6 @@
         </label>
 
         <div class="actions">
-          <button type="button" class="btn btn--ghost" (click)="cotizarEpsPared()">Cotizar</button>
           <button
             type="button"
             class="btn btn--primary"
@@ -276,16 +252,8 @@
             [disabled]="epsFormPared.invalid"
             [attr.aria-disabled]="epsFormPared.invalid"
           >
-            Pedir por WhatsApp
+            Conversar con un asesor
           </button>
-        </div>
-
-        <div class="summary" aria-live="polite">
-          <p>M²: <strong>{{ epsParedM2 | number:'1.2-2' }}</strong></p>
-          <p>Precio m²: <strong>{{ money(epsParedPrecioM2) }}</strong></p>
-          <p>Subtotal: <strong>{{ money(epsParedSubtotal) }}</strong></p>
-          <p>IGV (18%): <strong>{{ money(epsParedIgv) }}</strong></p>
-          <p class="total">Total: <strong>{{ money(epsParedTotal) }}</strong></p>
         </div>
       </form>
     </div>
@@ -309,8 +277,6 @@
         />
         <ul class="facts" role="list">
           <li>Plancha: <strong>11.95 m × 1.12 m</strong></li>
-          <li>Espesor: <strong>100</strong> o <strong>150 mm</strong></li>
-          <li>Precio unitario mostrado incluye IGV</li>
         </ul>
       </div>
 
@@ -340,7 +306,6 @@
         </label>
 
         <div class="actions">
-          <button type="button" class="btn btn--ghost" (click)="cotizarPur()">Cotizar</button>
           <button
             type="button"
             class="btn btn--primary"
@@ -348,15 +313,8 @@
             [disabled]="purForm.invalid"
             [attr.aria-disabled]="purForm.invalid"
           >
-            Pedir por WhatsApp
+            Conversar con un asesor
           </button>
-        </div>
-
-        <div class="summary" aria-live="polite">
-          <p>Precio unitario (con IGV): <strong>{{ money(purUnitConIgv) }}</strong></p>
-          <p>Subtotal: <strong>{{ money(purSubtotal) }}</strong></p>
-          <p>IGV (18%): <strong>{{ money(purIgv) }}</strong></p>
-          <p class="total">Total: <strong>{{ money(purTotalConIgv) }}</strong></p>
         </div>
       </form>
     </div>

@@ -34,11 +34,11 @@ export class DoorsComponent {
 
   get whatsappMessage(): string {
     const detalleHojas = this.tipoPuerta === 'vaiven' ? ` con ${this.hojas} hoja(s)` : '';
-    return `Hola, estoy interesado en una puerta tipo ${this.tipoPuerta}${detalleHojas} de ${this.ancho}m x ${this.alto}m. La cotización es $${this.precio.toFixed(2)}`;
+    return `Hola, estoy interesado en una puerta tipo ${this.tipoPuerta}${detalleHojas} de ${this.ancho}m x ${this.alto}m.`;
   }
 
   enviarWhatsApp() {
-    const url = `https://wa.me/51991038374?text=${encodeURIComponent(this.whatsappMessage)}`;
+    const url = `https://wa.me/51998691832?text=${encodeURIComponent(this.whatsappMessage)}`;
     window.open(url, '_blank');
   }
 }
