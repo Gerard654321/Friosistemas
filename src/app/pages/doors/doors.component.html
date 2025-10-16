@@ -16,6 +16,12 @@
     </div>
   </section>
 
+  <div class="scrolling-banner">
+    <div class="scrolling-text">
+      <span>🏗️ Fabricación nacional • 🚚 Envíos a todo el Perú • ❄️ Puertas de alta eficiencia térmica • ⚙️ Cotización instantánea • 🧊 Calidad Cruz del Sur</span>
+    </div>
+  </div>
+
   <section class="doors container" aria-labelledby="doors-cotizacion-title">
     <h2 id="doors-cotizacion-title" class="section-title">
         Calculadora Rápida
@@ -38,12 +44,16 @@
               </div>
             </label>
 
+            <p></p>
+
             <label class="option-card vaiven" [class.active]="tipoPuerta === 'vaiven'">
               <input type="radio" name="tipoPuerta" value="vaiven" [(ngModel)]="tipoPuerta" (change)="calcularPrecio()">
               <div class="card-content">
                 <h3>Vaivén</h3>
               </div>
             </label>
+
+            <p></p>
 
             <label class="option-card corrediza" [class.active]="tipoPuerta === 'corrediza'">
               <input type="radio" name="tipoPuerta" value="corrediza" [(ngModel)]="tipoPuerta" (change)="calcularPrecio()">
