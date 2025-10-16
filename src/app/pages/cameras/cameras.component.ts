@@ -31,7 +31,7 @@ interface MotorOption {
 @Component({
   selector: 'app-cameras',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TitleCasePipe, DecimalPipe],
+  imports: [CommonModule, ReactiveFormsModule, TitleCasePipe],
   templateUrl: './cameras.component.html',
   styleUrls: ['./cameras.component.css']
 })

@@ -3,10 +3,11 @@
     <div
       class="panels__hero-bg"
       [style.background-image]="
-        'linear-gradient(180deg, rgba(11,18,32,.05) 0%, rgba(11,18,32,.72) 60%, var(--bg) 100%), url(' + images.heroBg + ')'
+        'linear-gradient(180deg, rgba(11,18,32,.05) 0%, rgba(11,18,32,.72) 100%, var(--bg) 100%), url(' + images.heroBg + ')'
       "
       style="background-position: center; background-size: cover; background-repeat: no-repeat;"
     ></div>
+
     <div class="panels__hero-content">
       <h1 id="panels-title" class="panels__title">Diseña tu Cámara Frigorífica</h1>
       <p class="panels__subtitle">
@@ -14,6 +15,13 @@
       </p>
     </div>
   </header>
+
+  <div class="scrolling-banner">
+    <div class="scrolling-text">
+      <span>🔹 Diseña con precisión ▪️ Personaliza materiales ▪️ Calcula dimensiones ▪️ Recibe asesoría experta ▪️</span>
+      <span>🔹 Diseña con precisión ▪️ Personaliza materiales ▪️ Calcula dimensiones ▪️ Recibe asesoría experta ▪️</span>
+    </div>
+  </div>
 
   <div class="container">
     <fieldset class="step-group" aria-label="Paso 1: Selección de Material">
@@ -98,11 +106,7 @@
                 class="plano-image"
               />
             </div>
-            <form
-              [formGroup]="medidasForm"
-              class="form-group"
-              aria-label="Entrada de dimensiones"
-            >
+            <form [formGroup]="medidasForm" class="form-group" aria-label="Entrada de dimensiones">
               <label class="field">
                 <span class="field__label">Ancho (m)</span>
                 <input

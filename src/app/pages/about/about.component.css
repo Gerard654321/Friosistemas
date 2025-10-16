@@ -79,12 +79,6 @@
 .about__hero-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(249, 250, 251, 0.15) 0%,
-    rgba(249, 250, 251, 0.75) 60%,
-    var(--bg) 100%
-  );
 }
 
 .about__hero-content {
@@ -94,7 +88,7 @@
 
 .about__eyebrow {
   margin: 0 0 var(--sp-1);
-  color: var(--muted);
+  color: #ffffff;
   font-size: var(--fz-sm);
   letter-spacing: 0.02em;
   animation: fade-up var(--t-slow) ease both;
@@ -106,12 +100,13 @@
   line-height: 1.05;
   font-size: clamp(1.875rem, 3.2vw + 1rem, 3rem);
   animation: fade-up var(--t-slow) ease 0.08s both;
+  color: #ffffff;
 }
 
 .about__subtitle {
   margin: 0 auto;
   max-width: 70ch;
-  color: var(--muted);
+  color: #ffffff;
   font-size: var(--fz-lg);
   line-height: 1.6;
   animation: fade-up var(--t-slow) ease 0.16s both;
