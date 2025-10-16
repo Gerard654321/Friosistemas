@@ -61,11 +61,11 @@
           </div>
           <div class="form-group dimensions">
             <div>
-              <label for="ancho">Ancho de Vano(m): </label>
+              <label for="ancho">Ancho de la puerta: </label>
               <input type="number" [(ngModel)]="ancho" name="ancho" step="0.01" min="0.5" max="5.0" (input)="calcularPrecio()" required>
             </div>
             <div>
-              <label for="alto">Alto de Vano(m): </label>
+              <label for="alto">Alto de la puerta: </label>
               <input type="number" [(ngModel)]="alto" name="alto" step="0.01" min="1.0" max="5.0" (input)="calcularPrecio()" required>
             </div>
           </div>
@@ -88,7 +88,7 @@
             </div>
 
             <div class="doors__preview">
-              <p class="preview-title">Esquema 2D (Escala 1:100)</p>
+              <p class="preview-title">Esquema</p>
               <div
                 class="preview-wrapper"
                 [style.width.px]="ancho*100 > 300 ? 300 : ancho*100 + 40"
@@ -142,7 +142,7 @@
             </div>
 
             <div class="doors__quote" role="status">
-                <p><strong>Área:</strong> <span>{{ area | number: '1.2-2' }} m²</span></p>
+                <p><strong>Área: </strong> <span>{{ area | number: '1.2-2' }} m²</span></p>
             </div>
         </div>
 

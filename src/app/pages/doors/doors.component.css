@@ -383,6 +383,10 @@
   transition: all var(--t-slow) ease;
 }
 
+.door-svg text {
+  font-size: 10px;
+}
+
 .empty-preview-text {
   color: var(--muted);
   font-style: italic;
@@ -438,7 +442,9 @@
   transition: transform var(--t-fast) ease, background var(--t-fast) ease,
     border-color var(--t-fast) ease, box-shadow var(--t-fast) ease;
   cursor: pointer;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.3;
 }
 
 .btn--lg {
@@ -448,8 +454,8 @@
 }
 
 .btn--whatsapp {
-  background: #25d366;
-  color: #fff;
+  background: #010b1fff;
+  color: #56bae0;
   border-color: transparent;
   box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
 
@@ -465,10 +471,11 @@
 .btn--whatsapp i {
   font-size: 1.35em;
   margin-right: 0.25rem;
+  align-self: center;
 }
 
 .btn--whatsapp:hover {
-  background: #1ebe5d;
+  background: #0b6793;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
 }
@@ -483,11 +490,44 @@
   .doors {
     padding: var(--sp-4) 0 var(--sp-6);
   }
+  .preview-wrapper {
+    width: 100%;
+    max-width: unset;
+    height: auto;
+  }
+  .option-card {
+    height: 200px;
+  }
 }
 
 @media (max-width: 640px) {
+  .section-title,
+  .section-title-subtitle {
+    max-width: 320px;
+    margin-inline: auto;
+    width: 90%;
+  }
+
+  .doors__form,
+  .preview-column {
+    max-width: 320px;
+    margin-inline: auto;
+    width: 90%;
+  }
+
+  .btn--whatsapp {
+    max-width: 320px;
+    margin-inline: auto;
+    width: 90%;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    padding: 0.8rem 1.2rem;
+  }
+
   .options {
     grid-template-columns: 1fr;
+  }
+  .option-card {
+    height: 180px;
   }
   .hero-section {
     min-height: 350px;
@@ -499,7 +539,7 @@
   .home__title-accent {
     font-size: clamp(1.4rem, 4vw, 2rem);
   }
-  .form-step {
+  .card-modern {
     padding: var(--sp-3);
   }
   .step-header h3 {
@@ -508,8 +548,10 @@
   .dimensions {
     grid-template-columns: 1fr;
   }
-  .btn--whatsapp {
-    width: 100%;
-    margin-inline: 0;
+  .door-svg text {
+    font-size: 8px;
+  }
+  .preview-wrapper {
+    aspect-ratio: 4/3;
   }
 }
